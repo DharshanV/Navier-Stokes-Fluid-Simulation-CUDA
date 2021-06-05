@@ -32,6 +32,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="ElementBuffer.h" />
     <ClInclude Include="GLFW.h" />
+    <ClInclude Include="Numerics-CUDA.h" />
     <ClInclude Include="Numerics.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Simulation.h" />

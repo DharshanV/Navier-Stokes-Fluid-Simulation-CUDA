@@ -1,6 +1,11 @@
 #pragma once
 
-int IX(int x, int y, int N) {
+#include <cuda_runtime.h>
+#include <curand.h>
+#include <curand_kernel.h>
+
+__global__
+inline int IX(int x, int y, int N) {
 	if (x < 0) { x = 0; }
 	if (x > N - 1) { x = N - 1; }
 
@@ -10,6 +15,7 @@ int IX(int x, int y, int N) {
 	return (y * N) + x;
 }
 
+__host__
 void setBnd(int b, float* x, int N) {
 	for (int i = 1; i < N - 1; i++) {
 		x[IX(i, 0, N)] = b == 2 ? -x[IX(i, 1, N)] : x[IX(i, 1, N)];
@@ -35,6 +41,7 @@ void setBnd(int b, float* x, int N) {
 		+ x[IX(N - 1, N - 1, N)]);
 }
 
+__global__
 void linSolve(int b, float x[], float x0[], float a, float c, int iter, int N) {
 	float cRecip = 1.0 / c;
 	for (int k = 0; k < iter; k++) {
